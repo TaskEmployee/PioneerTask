@@ -63,6 +63,16 @@ namespace Pioneer.Controllers.EmployeeControllers
             }
             return View(employeeDto);
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            var Emp = await _employeeService.GetByIdEmployee(id);
+            if (Emp == null)
+            {
+                return NotFound();
+            }
+            _employeeService.DeleteEmployee(Emp);
+            return RedirectToAction("Index");
+        }
     }
     }
 
